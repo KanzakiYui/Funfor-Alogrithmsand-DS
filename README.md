@@ -1,2 +1,2 @@
 # TypeScript2020
-TypeScript 3.X Related
+Play around TypeScript (__*I hope so*__), in order to refresh myself some CS fundamentals :)
