@@ -1,8 +1,16 @@
 {
     "compilerOptions": {
+      // https://www.typescriptlang.org/docs/handbook/compiler-options.html
       "target": "es5",
       "module": "commonjs",
       "outDir": "dist",
       "sourceMap": true
-    }
+    },
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+    ]
 }
