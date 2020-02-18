@@ -8,7 +8,7 @@
 
 /// Suppose we sort in non-descending order
 
-const insertionSort = (array: Array<Number>) : Array<Number> => {
+const insertionSort = (array: Array<number>) : Array<number> => {
     // Checking all elements start from 2nd one in array B
     for(let i = 1; i<array.length; i++){
         // pick current unsorted element from array
