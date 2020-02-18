@@ -6,15 +6,14 @@
 
 /// Inplace: true
 
-/// Suppose we sort in ascending order
+/// Suppose we sort in non-descending order
 
 const insertionSort = (array: Array<Number>) : Array<Number> => {
-    const length = array.length;
     // Checking all elements start from 2nd one in array B
-    for(let i = 1; i<length; i++){
+    for(let i = 1; i<array.length; i++){
         // pick current unsorted element from array
         const currentUnsortedElement = array[i];
-        // compare it with every element in the sorted ascending subarray
+        // compare it with every element in the sorted non-descending subarray
         // A on the left.
         let j = i - 1;
         /*
@@ -24,7 +23,7 @@ const insertionSort = (array: Array<Number>) : Array<Number> => {
             suppose x[j] > x[i], then xj need rightforward one position, which
             means x[j+1] = x[j], then during the iteration, until we find
             the termination condition, suppose j = k, all we have so far is:
-            x[i] = x[i-1]      // x[i-1] = x[j] right forward one position
+            x[i] = x[i-1]      // means x[i-1] (=x[j]) right forward one position
             x[i-1] = x[i-2]
             x[i-2] = x[i-3]
             ...
@@ -36,6 +35,8 @@ const insertionSort = (array: Array<Number>) : Array<Number> => {
             // thus k+1 must be the correct position for x[i]
             x[k+1] = original value of x[i]
         */
+        // if we change to `currentUnsortedElement > array[j]`, we can sort
+        // in non-ascending order. Think about why?
         while( j >= 0 && currentUnsortedElement < array[j]) {
             array[j+1] = array[j];
             j = j - 1;
