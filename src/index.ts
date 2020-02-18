@@ -1,19 +1,7 @@
-// https://code.visualstudio.com/docs/typescript/typescript-tutorial
-import Person from './Person';
+import insertionSort from './sorting/insertion-sort';
 
-const Greeter  = (person: Person) => {
-    console.log(person.name);
+////////////////////////////////////////////////////////////////////////////
+/// Test
 
-    console.log(person.age);
-};
-
-const person = {
-    name: 'Lee',
-    age: 17,
-    alive: true,
-    point: [1, 3, 5, 7],
-    comments: [['Hello Word', 'Welcome'], ['There is nothing', 'to say']]
-};
-
-Greeter(person);
-
+const array = [5, 2, 4, 6, 1, 3];
+console.log(insertionSort(array));
