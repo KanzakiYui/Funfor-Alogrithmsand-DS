@@ -10,7 +10,7 @@
 
 const insertionSort = (array: Array<number> = []) : Array<number> => {
     // Checking all elements start from 2nd one in array B
-    for(let i = 1; i<array.length; i++){
+    for(let i = 1; i < array.length; i++){
         // pick current unsorted element from array
         const currentUnsortedElement = array[i];
         // compare it with every element in the sorted non-descending subarray
@@ -37,7 +37,7 @@ const insertionSort = (array: Array<number> = []) : Array<number> => {
         */
         // if we change to `currentUnsortedElement > array[j]`, we can sort
         // in non-ascending order. Think about why?
-        while( j >= 0 && currentUnsortedElement < array[j]) {
+        while(j >= 0 && currentUnsortedElement < array[j]) {
             array[j+1] = array[j];
             j = j - 1;
         }
