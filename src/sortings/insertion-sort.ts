@@ -7,7 +7,7 @@
 
 ////////////////////////////////////////////////////////////////////////////
 /// Time Complexity
-/// Worst case: O(n^2)          --- when current order is in inverted order
+/// Worst case: O(n^2)          --- when current order is in reverse order
 /// Average case: O(n^2)
 /// Best case: O(n)             --- when current order is exact same as goal
 
