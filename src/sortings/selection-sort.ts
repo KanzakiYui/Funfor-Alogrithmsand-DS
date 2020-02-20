@@ -1,18 +1,25 @@
 ////////////////////////////////////////////////////////////////////////////
 /// Selection Sort
-/// Start from i = 0, picked the smallest (or largest if want to order in 
-/// inverted way) from its right side, exchange these two elements, and of
-/// course, we know that for any 'current element', the left side subarray
-/// is sorted while right side subarray is unsorted, for example:
-/// [ [sorted A] [unsorted B] ]
+/// Start from i = 0, for any given element A, picked the smallest(or largest
+/// if want to order in non-ascending way) B from A's right side, exchange
+/// A and B. Obviously, during the process, the left side subarray of A is
+/// always sorted while right side subarray of A is unsorted.
 
-/// Inplace: true
+////////////////////////////////////////////////////////////////////////////
+/// Time Complexity
+/// Always O(n^2) since for any A, it unavoidably needs to compare every B
+/// on its right side regardless array's initial order/status.
 
-/// Suppose we sort in non-descending order
+////////////////////////////////////////////////////////////////////////////
+/// Space Complexity
+/// Always O(1), since it's in-place and no additional data structure needed
+
+/// Assumption: Suppose now we sort in non-descending order
 
 const selectionSort = (array: Array<number> = []) : Array<number> => {
     // We only need to iterate till the (n-1)th element, think about why?
     for(let i = 0; i < array.length - 1; i++){
+        // pick current unsorted element from array
         const currentUnsortedElement = array[i]
         /*
             check everyone on the right side

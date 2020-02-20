@@ -1,45 +1,43 @@
 ////////////////////////////////////////////////////////////////////////////
 /// Insertion Sort
-/// Sort elements continuously from the unsorted subarray (right) B by
-/// comparing it with all elements in the sorted subarray (left) A and insert
-/// it into the  right position, for example: [ [sorted A] [unsorted B] ]
+/// Start from 2nd elements, comparing current one with each element in the 
+/// subarray on left side which is already sorted, and move those larger (or
+/// smaller if want to sort in non-ascending order) right by one position,
+/// and insert current one in the correct position.
 
-/// Inplace: true
+////////////////////////////////////////////////////////////////////////////
+/// Time Complexity
+/// Worst case: O(n^2)          --- when current order is in inverted order
+/// Average case: O(n^2)
+/// Best case: O(n)             --- when current order is exact same as goal
 
-/// Suppose we sort in non-descending order
+////////////////////////////////////////////////////////////////////////////
+/// Space Complexity
+/// Always O(1), since it's in-place and no additional data structure needed
+
+/// Assumption: Suppose now we sort in non-descending order
 
 const insertionSort = (array: Array<number> = []) : Array<number> => {
-    // Checking all elements start from 2nd one in array B
+    // Checking all elements start from 2nd one.
     for(let i = 1; i < array.length; i++){
         // pick current unsorted element from array
         const currentUnsortedElement = array[i];
-        // compare it with every element in the sorted non-descending subarray
-        // A on the left.
-        let j = i - 1;
         /*
-            Only insert/reorder if it's smaller than existing one in A.
-            since the best case is current one is larger than every one
-            in A (which means larger than last element in A)
-            suppose x[j] > x[i], then xj need rightforward one position, which
-            means x[j+1] = x[j], then during the iteration, until we find
-            the termination condition, suppose j = k, all we have so far is:
-            x[i] = x[i-1]      // means x[i-1] (=x[j]) right forward one position
-            x[i-1] = x[i-2]
-            x[i-2] = x[i-3]
-            ...
-            x[k+2] = x[k+1]    // here j = k+1, then j = j - 1 = k
-            // now j = k, meet the termiantion condition, and now we have:
-            // x[0, 1, ... k] are smaller than x[i], while
-            // x[k+2, k+3, ... i-1] are bigger than x[i], current x[i] has
-            // value of previous x[i-1] since rightforwarded.
-            // thus k+1 must be the correct position for x[i]
-            x[k+1] = original value of x[i]
+            For a given current element A = n[i], compare it with every element
+            B = n[j] in the sorted subarray on the left, here we iterate j from
+            i-1 to 0. If B > A, which means B needs move rightforward
+            by one position to leave a (potential) vacancy for A, then n[j+1]=n[j].
+            Until B=n[k] <= A, then it means A should be just right of B=n[k], so
+            n[k+1] = A.
+            In such method, if we change comparison condition to x[j] < x[i], which
+            means B < A, then we will sort in non-ascending order, think about why?
         */
-        // if we change to `currentUnsortedElement > array[j]`, we can sort
-        // in non-ascending order. Think about why?
-        while(j >= 0 && currentUnsortedElement < array[j]) {
-            array[j+1] = array[j];
-            j = j - 1;
+        let j : number;
+        for(j = i-1; j >= 0; j--){
+            if(array[j] > currentUnsortedElement)
+                array[j+1] = array[j];
+            else
+                break; 
         }
         array[j+1] = currentUnsortedElement;
     }
