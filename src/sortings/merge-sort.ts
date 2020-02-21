@@ -50,7 +50,8 @@ const mergeSort = (array : Array<number> = []) : Array<number> => {
     // Here we declared what the recursion function takes:
     // 1.   Always the global array (no need other space resource)
     // 2.   startIndex, endIndex to imply which 'subarray' we are processing now
-    const sort = (array: Array<number>, startIndex: number, endIndex: number) => {
+    const sort = (array: Array<number>, startIndex: number, endIndex: number) : void =>
+    {
         // if n = 1, solve directly, which means no need modify global array
         if(startIndex === endIndex)
             return;
