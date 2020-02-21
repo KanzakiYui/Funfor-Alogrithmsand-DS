@@ -72,7 +72,9 @@ const maximumSubarray = (array : Array<number>) : void => {
         getMaximumSubarray(array, 0, array.length - 1);
 
     console.log(
-        'The maximum subarray is',
+        'The maximum subarray of',
+        array,
+        'is',
         array.slice(startIndex, endIndex+1),
         'with total sum of',
         maxSum
