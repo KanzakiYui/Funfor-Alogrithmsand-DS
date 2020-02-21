@@ -1,4 +1,5 @@
 import Sortings from './sortings';
+import Problems from './problems';
 
 ////////////////////////////////////////////////////////////////////////////
 /// Interface of App instance initial params
@@ -33,6 +34,7 @@ class App {
 
     // expose all sorting methods
     public sort = this.preprocessSortings()
+    public problem = Problems
 
 }
 
