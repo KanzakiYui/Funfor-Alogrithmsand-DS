@@ -41,44 +41,30 @@
 /// Assumption: Suppose now we sort in non-descending order
 
 const mergeSort = (array : Array<number> = []) : Array<number> => {
-    const len = array.length;
-    // Conquer: also it's the terminate of the recursion
-    if(len === 1)
-        return array;
+    const sort = (array: Array<number>, startIndex: number, endIndex: number) => {
+        if(startIndex === endIndex)
+            return;
+        const middleIndex = Math.floor((startIndex + endIndex) / 2);
 
-    const splitPos = Math.ceil(len/2);
-    // Divide:  it can also be done by using loop to assign to new arrays.
-    const leftArray = array.slice(0, splitPos);
-    const rightArray = array.slice(splitPos);
-    // Recursion
-    const sortedLeftArray = mergeSort(leftArray);
-    const sortedRightArray = mergeSort(rightArray);
-    // Combine: combine sortedLeftArray and sortedRightArray subarrays.
-    const rightArrayLength = len - splitPos;
-    // i points to the current smallest one in left array, initially it's 0
-    // j points to the current smallest one in right array, initially it's 0
-    let i=0, j=0;
-    for(let k=0; k<len; k++){
-        /*
-            there is an edge case, suppose one of the array already be fully
-            picked, here we use 'j >= rightArrayLength' to imply sortedRightArray
-            is all picked, then we must pick from the other one, here means
-            sortedLeftArray.
-            Fact 1: when both arrays are fully picked, the for loop terminates,
-            which means exactly when k = len, think about why?
-            Fact 2: when we use 'sortedLeftArray[i] > sortedRightArray[j]' instead,
-            it will sort in non-ascending order, think about why?
-        */
-        if(sortedLeftArray[i] <= sortedRightArray[j] || j >= rightArrayLength){
-            array[k] = sortedLeftArray[i];
-            // once used, move the pointer right forwad.
-            i++;
+        // [startIndex, middleIndex], [middleIndex+1, endIndex]
+        sort(array, startIndex, middleIndex);
+        sort(array, middleIndex+1, endIndex);
+
+        const tempArray = array.slice(startIndex, middleIndex+1);
+        const leftLength = middleIndex - startIndex + 1;
+        let leftPointer = 0, rightPointer = middleIndex + 1, modifiedPointer = startIndex;
+
+        while(leftPointer < leftLength && rightPointer <= endIndex){
+            array[modifiedPointer++] = tempArray[leftPointer] < array[rightPointer]
+                ? tempArray[leftPointer++]
+                : array[rightPointer++]
         }
-        else{
-            array[k] = sortedRightArray[j];
-            j++;
+
+        while(leftPointer < leftLength){
+            array[modifiedPointer++] = tempArray[leftPointer++]
         }
     }
+    sort(array, 0, array.length - 1);
     return array;
 }
 
