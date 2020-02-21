@@ -12,59 +12,106 @@
 
 ////////////////////////////////////////////////////////////////////////////
 /// Time Complexity
-/// Always O(n*logn)
-/// Reason: Since regardless of its initial order, for every two
-/// divided subarrays, we still need to compare one by one. Every 'Combine'
-/// takes O(n), while it repeat (recurrsion) in logarithmic time, for example,
-/// nearly log2(n) if each time we divide array equally.
+/// Always O(nlgn)
+/// Reason: suppose T(n) is the time spent on worst case, then we have:
+/// T(n) = 2T(m/2) + O(n) + O(1), which means
+/// Total time = 2 * subproblems time + combine time + division time
+/// Note that n is even or odd won't affect this formula.
+/// Using Master Theorem, we can get T(n) = O(nlgn) where lgn means log2(n)
+/// On the other hand, it's not hard to find out that each recursion costs
+/// at most O(n), while there are O(lgn) times recursion (recursion tree)
+/// thus, we can roughly estimate it's O(nlgn)
 
 ////////////////////////////////////////////////////////////////////////////
 /// Space Complexity
 /// Always: O(n)        -------------   if use array not linked list
-/// Reason: Please note that the actual code exection is not run in parallel
-/// and every time the function exist (and return back to caller), the memory
-/// is freed due to garbage collection. Let's use n = 4 as an example shown
-/// below, same for n = 8, n = 16, etc. The total space used AT ANY TIME POINT
-/// is always O(n)
-/*                                                        
-    (2, not yet)     =>          2   (2, not yet)    =>     2     2  => final
-    / \                              / \
-   1   1      (total = 2)           1   1   (total = 4)     (total =4)
-*/
-
-////////////////////////////////////////////////////////////////////////////
-/// Note:
-/// When calcualte time complexity, we do accumulation (sum up all), of course.
-/// When calcualte space complexity, we only consider at a given time point,
-/// how many resource/auxiliary are used. (consider garbage collection etc.)
+/// Before give reason, we need to know two facts:
+/// 1.  when we calculate time complexity T(n), we accumulate all time spent
+/// 2.  when we calculate space complexity S(n), we only consider at any
+///     given time, at most how many resource/auxiliary are used. For example,
+///     if we consider garbage collection when each recursive call exits.
+/// Another important thing is, it may depend on our implement details, for
+/// example, if we allocate two temp subarrays in each recursion before
+/// merge-sort the two subarrays respectively recursively, then lots of spaces
+/// resources may be taken!
+/// However, in a standard merge sort algorithm, we don't need to do spend too
+/// much, since we can use 'startIndex, endIndex' together with the global array
+/// to 'simulate' the truncated subarray. See below implementation.
+/// 1.  In any recursion (n=k), there are only one tempArray created which is
+///     used to combine two sorted parts (or we call 'subarrays').
+/// 2.  tempArray is created after merge-sort 'subarrays'.
+/// Therefore, it's not hard to find out the most additional auxiliary we used
+/// is nearly n/2, with some other O(1), and of course, input array is always passed
+/// by reference (in-place change!!), so totally use O(n) is reasonable and safe.
 
 /// Assumption: Suppose now we sort in non-descending order
 
 const mergeSort = (array : Array<number> = []) : Array<number> => {
+    // Here we declared what the recursion function takes:
+    // 1.   Always the global array (no need other space resource)
+    // 2.   startIndex, endIndex to imply which 'subarray' we are processing now
     const sort = (array: Array<number>, startIndex: number, endIndex: number) => {
+        // if n = 1, solve directly, which means no need modify global array
         if(startIndex === endIndex)
             return;
-        const middleIndex = Math.floor((startIndex + endIndex) / 2);
 
-        // [startIndex, middleIndex], [middleIndex+1, endIndex]
+        const middleIndex = Math.floor((startIndex + endIndex) / 2);
+        /*
+            Now we have two 'simulated' subarrays, which are:
+            1. [startIndex, ..., middleIndex]
+            2. [middleIndex+1, ..., endIndex]
+        */
+        // Divide and Recursion
         sort(array, startIndex, middleIndex);
         sort(array, middleIndex+1, endIndex);
 
+        /*
+            Now we have:
+            1. sorted array[startIndex, ..., middleIndex] = A1
+            2. sorted array[middleIndex+1, ..., endIndex] = A2
+            How to combine? Of course, we need to iterate:
+            A = [A1, A2] = [startIndex, ..., endIndex]
+            Since it's what we need process in this recursion, and we use
+            'iteratePointer' stands for corresponding iterator.
+
+            In each iteration, we compare 'currently minimum' of sorted A1, A2.
+            In order to preserve values of A1, we copy it to tempArray.
+            We use another two iterators: 'leftPointer', 'rightPointer'.
+        */
+
+        // Copy
         const tempArray = array.slice(startIndex, middleIndex+1);
+
+        // for A
+        let iteratePointer = startIndex;    
+        // for tempArray (copy from A1), range: 0 <= x < leftLength
         const leftLength = middleIndex - startIndex + 1;
-        let leftPointer = 0, rightPointer = middleIndex + 1, modifiedPointer = startIndex;
+        let leftPointer = 0;
+        // for A2, range: middleIndex + 1 <= x <= endIndex
+        let rightPointer = middleIndex + 1;
 
         while(leftPointer < leftLength && rightPointer <= endIndex){
-            array[modifiedPointer++] = tempArray[leftPointer] < array[rightPointer]
+            array[iteratePointer++] = tempArray[leftPointer] < array[rightPointer]
                 ? tempArray[leftPointer++]
                 : array[rightPointer++]
         }
 
+        /*
+            Finally, there are two edge cases:
+            1.  tempArray finished iteration, A2 not yet, well, we leave remaining
+                of A2 as where they are (think about why?)
+            2.  A2 finished iteration, tempArray not yet, then continue copy remaining           
+                of tempArray to remaining vacancy in A 
+        */
+
         while(leftPointer < leftLength){
-            array[modifiedPointer++] = tempArray[leftPointer++]
+            array[iteratePointer++] = tempArray[leftPointer++]
         }
     }
+
+    // Initially, of course, startIndex = 0, endIndex = array's length - 1
     sort(array, 0, array.length - 1);
+    // Note that array changed in-place!
     return array;
 }
 

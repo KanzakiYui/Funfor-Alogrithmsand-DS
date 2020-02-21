@@ -13,7 +13,7 @@
 ////////////////////////////////////////////////////////////////////////////
 /// Space Complexity
 /// Always O(1)
-/// Reason: input rray passed by reference, and it's in-place algorithm, no
+/// Reason: input array passed by reference, and it's in-place algorithm, no
 /// need extra space/additional data structure to store the output, etc.
 
 /// Assumption: Suppose now we sort in non-descending order
