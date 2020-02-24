@@ -105,7 +105,7 @@ const getMaximumSubarray = (
     
 }
 
-const maximumSubarray = (array : Array<number>) : void => {
+const divideAndConquer = (array : Array<number>) : void => {
     const [startIndex, endIndex, maxSum] =
         getMaximumSubarray(array, 0, array.length - 1);
 
@@ -119,4 +119,4 @@ const maximumSubarray = (array : Array<number>) : void => {
     );
 };
 
-export default maximumSubarray;
+export default divideAndConquer;

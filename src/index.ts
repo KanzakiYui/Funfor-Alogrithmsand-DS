@@ -17,9 +17,9 @@ const array = [7, 9, 13, 11, 8, 5, 13, 11, 12];;
 // app.sort.selectionSort(array);
 // app.sort.mergeSort();
 // app.sort.mergeSort(array);
-app.problem.maximumSubarray(
+app.problem.maximumSubarray.divideAndConquer(
     [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
 );
-app.problem.maximumSubarray(
+app.problem.maximumSubarray.divideAndConquer(
     [-2,1,-3,4,-1,2,1,-5,4]
 );
