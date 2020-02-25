@@ -1,4 +1,5 @@
 import App from './app';
+import Heap from './sortings/heap-sort';
 
 ////////////////////////////////////////////////////////////////////////////
 /// Initial params
@@ -17,15 +18,17 @@ const app = new App({
 // app.sort.selectionSort(array);
 // app.sort.mergeSort();
 // app.sort.mergeSort(array);
-app.problem.maximumSubarray.divideAndConquer(
-    [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
-);
-app.problem.maximumSubarray.divideAndConquer(
-    [-2,1,-3,4,-1,2,1,-5,4]
-);
-app.problem.maximumSubarray.dynamicProgramming(
-    [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
-);
-app.problem.maximumSubarray.dynamicProgramming(
-    [-2,1,-3,4,-1,2,1,-5,4]
-);
+// app.problem.maximumSubarray.divideAndConquer(
+//     [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
+// );
+// app.problem.maximumSubarray.divideAndConquer(
+//     [-2,1,-3,4,-1,2,1,-5,4]
+// );
+// app.problem.maximumSubarray.dynamicProgramming(
+//     [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
+// );
+// app.problem.maximumSubarray.dynamicProgramming(
+//     [-2,1,-3,4,-1,2,1,-5,4]
+// );
+
+new Heap([1, 2, 3, 4, 5, 6, 7, 8]).printHeap();
