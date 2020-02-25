@@ -3,7 +3,7 @@
 /// Given an array A of numbers, find a non-empty contiguous subarray B
 /// (contiguous means picked elements from A are consecutive), so that the
 /// sum of the all elements in this B is maximum.
-/// For example: A = [1, -2, 3, -4, 5], then B = [5]
+/// For example: A = [1, -2, 3, -4, 5, 2, -1], then B = [5, 2]
 
 
 ////////////////////////////////////////////////////////////////////////////

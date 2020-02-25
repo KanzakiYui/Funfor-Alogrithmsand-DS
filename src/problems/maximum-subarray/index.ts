@@ -1,7 +1,7 @@
 import divideAndConquer from './divide-and-conquer';
-import test from './linear';
+import dynamicProgramming from './dynamic-programming';
 
 export default {
     divideAndConquer,
-    test
+    dynamicProgramming
 };
