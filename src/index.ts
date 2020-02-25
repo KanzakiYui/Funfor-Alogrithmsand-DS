@@ -23,3 +23,9 @@ app.problem.maximumSubarray.divideAndConquer(
 app.problem.maximumSubarray.divideAndConquer(
     [-2,1,-3,4,-1,2,1,-5,4]
 );
+app.problem.maximumSubarray.test(
+    [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
+);
+app.problem.maximumSubarray.test(
+    [-2,1,-3,4,-1,2,1,-5,4]
+);
