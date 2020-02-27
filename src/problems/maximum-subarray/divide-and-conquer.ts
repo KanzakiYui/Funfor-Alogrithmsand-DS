@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 /// Maximum Subarray
 /// Given an array A of numbers, find a non-empty contiguous subarray B
 /// (contiguous means picked elements from A are consecutive), so that the
@@ -6,7 +6,7 @@
 /// For example: A = [1, -2, 3, -4, 5, 2, -1], then B = [5, 2]
 
 
-////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 /// Solution - Divide and Conquer
 /// Please note that divide and conquer may not be the whole solution of the
 /// problem, but CAN be PART of solution of the whole problem. Therefore,
@@ -20,18 +20,22 @@
 /// Get the maximum one from the result of (1), (2), (3) and that is the 
 /// maximum for current A.
 
-////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 /// Time Complexity
 /// T(n) = O(nlgn)
 /// Reason: suppose size n is a power of 2, and note time complexity as T(n)
 /// Beside those constant time O(1), we can easily have:
 /// T(n) = 2T(n/2) + O(n) => Obviously, findMaxCrossingSubarray takes O(n):
 
-////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 /// Space Complexity
 /// O(lgn)
-/// Reason: for each recursion, only O(1) is taken (e.g. no auxiliary is used)
-/// while there are O(lgn) times recusion (the recursion tree depth), so O(lgn) 
+/// Reason: As we can see, there is a tuple (array, startIndex, endIndex) will be returned
+/// everytime findMaxCrossingSubarray or getMaximumSubarray is called, suppose it costs
+/// O(1) and together with other resouce allocated, and the depth is at most O(lgn), and
+/// as we can imagine, when some recursive function is called (goes deeper), there are
+/// already some resouce at current level is allocated and wait that function fully return,
+/// Then roughly speaking, it's O(1)O(lgn) = O(lgn)
 
 /// This method is dedicated to solve the case (2) --- when cross the middle one.
 const findMaxCrossingSubarray = (
