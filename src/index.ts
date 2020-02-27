@@ -11,7 +11,7 @@ const app = new App({
 ////////////////////////////////////////////////////////////////////////////
 /// Test
 
-// const array = [7, 9, 13, 11, 8, 5, 13, 11, 12];;
+// const array = [7, 9, 13, 11, 8, 5, 13, 11, 12];
 // app.sort.insertionSort();
 // app.sort.insertionSort(array);
 // app.sort.selectionSort();
@@ -31,4 +31,6 @@ const app = new App({
 //     [-2,1,-3,4,-1,2,1,-5,4]
 // );
 
-new Heap([1, 2, 3, 4, 5, 6, 7, 8]).printHeap();
+const heap = new Heap([3, 4, 7, 2, 5, 1, 6, 9, 0, 8, 9, 8, 11, 12, 15, 11]);
+heap.heapSort();
+heap.printHeap();

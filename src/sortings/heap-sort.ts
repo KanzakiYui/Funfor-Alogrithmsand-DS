@@ -22,7 +22,8 @@ class HeapNode {
 }
 
 class Heap {
-    public nodeTree: Array<HeapNode>
+    private nodeTree: Array<HeapNode>
+    private heapSize: number
 
     constructor (array: Array<number>){
         const len = array.length;
@@ -38,6 +39,7 @@ class Heap {
             this.nodeTree[i].left = leftIndex < len ? this.nodeTree[leftIndex] : null;
             this.nodeTree[i].right = rightIndex < len ? this.nodeTree[rightIndex] : null;
         }
+        this.heapSize = len;
     }
 
     private swap(node1: HeapNode, node2: HeapNode){
@@ -46,45 +48,50 @@ class Heap {
         node2.value = tempValue;
     }
 
+    // The requirement of using heapify is that the node at the given 
+    // index must be a root of a non-trivial subtree, otherwise useless,
+    // for example, the leaves are no need to be heapified.
     private heapify(index: number){
         const currentNode = this.nodeTree[index];
         const currentValue = currentNode.value;
         const leftNode = this.nodeTree[index].left;
-        const leftValue = leftNode?.value;
+        const leftValue = leftNode?.value || Number.MIN_SAFE_INTEGER;
         const rightNode = this.nodeTree[index].right;
         const rightValue = rightNode?.value;
-        if(leftValue > currentValue && leftValue > rightValue){
+        const isLeftExistInHeap = leftNode && leftNode.index < this.heapSize;
+        const isRightExistInHeap = rightNode && rightNode.index < this.heapSize;
+        if(  isLeftExistInHeap && leftValue > currentValue && (isRightExistInHeap ? leftValue >= rightValue : true)){
             this.swap(leftNode, currentNode);
             this.heapify(leftNode.index);
         }      
-        else if(rightValue > currentValue && rightValue > leftValue){
+        else if( isRightExistInHeap && rightValue > currentValue && (isLeftExistInHeap ? rightValue >= leftValue : true)){
             this.swap(rightNode, currentNode);
             this.heapify(rightNode.index);
         }
     }
 
     private buildHeap(){
-        for(let i = Math.floor(this.nodeTree.length/2); i >=0 ; i --)
+        const startIndex = Math.floor(this.heapSize/2) - 1;
+        for(let i = startIndex; i >=0 ; i --)
             this.heapify(i);
     }
 
     public heapSort(){
         this.buildHeap();
-        for(let i = this.nodeTree.length; i > 0; i++){
+        const lastIndex = this.nodeTree.length - 1;
+        for(let i = lastIndex; i >= 1; i--){
             this.swap(this.nodeTree[i], this.nodeTree[0])
-            
+            this.heapSize--;
+            this.heapify(0);
         }
     }
 
     public printHeap(){
+        let str = '';
         for(let i = 0; i < this.nodeTree.length; i++){
-            const currentNode = this.nodeTree[i];
-            console.log(`Node at index of ${i} has value of ${currentNode.value},
-            parent is ${currentNode.parent?.value},
-            left is ${currentNode.left?.value},
-            right is ${currentNode.right?.value}
-            `)
+            str += this.nodeTree[i].value + ' '
         }
+        console.log(str);
     }
 }
 
