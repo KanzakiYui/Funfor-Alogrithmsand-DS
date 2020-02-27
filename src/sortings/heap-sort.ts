@@ -1,11 +1,45 @@
-////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 /// Conception
-/// 1.  The height of a node in heap
+/// 1.  (Binary) Heap
+///     Can be presented as a (complete) binary tree
+/// 2.  Max(Min)-Heap
+///     For any subtree X (excluding non-trival tree), the root denotes as X,
+///     and X's left child is L, and X's right child is R, then:
+///     X is the largest(smallest) one among X, L, R.
+/// 3.  The height of a node in heap
 ///     The number of edges on the longest simple downward path from the node
 ///     to a leaf. For example, the leaf has height of 0, the parent of leaf
 ///     has height of 1.
-/// 2.  The height of a heap
+/// 4.  The height of a heap
 ///     = the height of root = O(lgn) if heap has size = n.
+
+///////////////////////////////////////////////////////////////////////////////////////
+/// Algorithm Ideas
+/// 1.  For a given array A, suppose we already have a max-heap to regardless
+///     how we get it, then how could we sort? Since a max-heap always imply
+///     the root of A is largest one (obviously), so we switch A[0] with last
+///     one A[n-1] (which also must be a leaf), and remove last one which is
+///     the largest, and we denote B as the result position:
+///     B[n-1] = A[n-1] then adjust the heap to make it still a max-heap, then
+///     do again - switch A[0] with A[n-2] (since what we already obtained will
+///     not in the heap anymore, for example, like here said, removal from heap)
+///     B[n-2] = A[n-1], then adjust heap, ...
+///     Recursivly do it untial switch A[0] and A[1], done! B is the sorted array
+///     and obviously it's in non-descending order.
+///
+/// 2.  Now it turns to a problem - how could we make A as a max-heap?
+///     Since max-heap means root of ANY subtree is largest one among it and children,
+///     it's turns to an other question:
+///     If we can make any possible subtree that root is the largest, then the whole
+///     tree is max-heap! <= Obviously!
+///     Now the question is, given any subarray's root (by index, suppose A[i]), how
+///     could we make sure A[i] is largest one among it and children? Simple! Compare
+///     and switch!
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/// Notice
+/// The following implmenetation looks complex is due to we want to fully present
 
 class HeapNode {
     public value: number;
