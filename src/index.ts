@@ -1,5 +1,4 @@
 import App from './app';
-import Heap from './sortings/heap-sort/heap-sort';
 
 ///////////////////////////////////////////////////////////////////////////////////////
 /// Initial params
@@ -31,6 +30,5 @@ const array = [7, 9, 13, 11, 8, 5, 13, 11, 12];
 //     [-2,1,-3,4,-1,2,1,-5,4]
 // );
 
-const heap = new Heap(array);
-heap.heapSort();
-heap.printHeap();
+app.sort.heapSort(array);
+app.sort.heapSort();

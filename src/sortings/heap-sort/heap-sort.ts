@@ -43,6 +43,8 @@
 /// the Heap and Node of Heap looks like regarding data structure. However, of course
 /// we can simply adopt the key idea and write less and concise code, but it's not the
 /// purpose of this file :)
+///
+/// PLEASE LOOK INTO ANOTHER FILE (heapsort/index.ts) TO SEE PURE ALGORITHM
 
 ///////////////////////////////////////////////////////////////////////////////////////
 /// Time Complexity
