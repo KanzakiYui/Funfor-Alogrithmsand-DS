@@ -18,12 +18,15 @@
 <h2>Algorithms</h2>
 <h4>Sortings</h4>
 <ol>
-    <li>Insertion Sort</li>
-    <li>Selection Sort</li>
-    <li>Merge Sort</li>
+    <li><a href='src/sortings/insertion-sort.ts'>Insertion Sort</a></li>
+    <li><a href='src/sortings/selection-sort.ts'>Selection Sort</a></li>
+    <li><a href='src/sortings/merge-sort.ts'>Merge Sort</a></li>
+    <li><a href='src/sortings/heap-sort/heap-sort.ts'>Heap Sort (with full data structure)</a></li>
+    <li><a href='src/sortings/heap-sort/index.ts'>Heap Sort (pure algorithm)</a></li>
 </ol>
 
 <h4>Problems</h4>
 <ol>
-    <li>Maximum Subarrays</li>
+    <li><a href='src/problems/maximum-subarray/divide-and-conquer.ts'>Maximum Subarrays (divide and conquer)</a></li>
+    <li><a href='src/problems/maximum-subarray/dynamic-programming.ts'>Maximum Subarrays (dynamic programming)</a></li>
 </ol>
