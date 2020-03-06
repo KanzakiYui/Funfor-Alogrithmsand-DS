@@ -63,7 +63,7 @@
 /// freed once function exit or no resource accumulated during lifetime. And of course
 /// no auxiliary (e.g. array) is needed.
 
-class HeapNode {
+export class HeapNode {
     public value: number;
     // We switch value to present switch node, so index in array shouldn't be changed.
     public readonly index: number;
@@ -83,10 +83,10 @@ class Heap {
     // Just like regular array, we present heap by using an array of heap nodes,
     // when draw the tree, we iterate this array from 0 to n-1, and draw tree from
     // left to right, top to bottom direction.
-    private heapNodes: Array<HeapNode>
+    protected heapNodes: Array<HeapNode>;
     // heapSize is used to determine A[0, 1, ..., size-1] is in heap range, while
     // [size, size+1, ..., n-1] is already switched and sorted part
-    private heapSize: number
+    protected heapSize: number;
 
     // If we just talke about heap sort algorithm, then all stuffs inside the constructor
     // is off topic, but again, it's for better illustration.
@@ -117,14 +117,14 @@ class Heap {
     // As said above, when switch node we only switch value, we treat node as position
     // However, a more completed way to present heap & heap node, may be changing parent,
     // left, right as well => but we will realize it's not easy to print the heap out.
-    private swap(node1: HeapNode, node2: HeapNode){
+    protected swap(node1: HeapNode, node2: HeapNode){
         const tempValue = node1.value;
         node1.value = node2.value;
         node2.value = tempValue;
     }
 
     // As long as we are given the index, we can find a subtree rooted at A[i]
-    private heapify(index: number){
+    protected heapify(index: number){
         const currentNode = this.heapNodes[index];
         const currentValue = currentNode.value;
         const leftNode = this.heapNodes[index].left;
@@ -153,7 +153,7 @@ class Heap {
         }
     }
 
-    private buildHeap(){
+    protected buildHeap(){
         /*
             Actually we can heapify from the very end till root, however, it does
             lots of unnecessary work, since all leaves shouldn't need be heapified
