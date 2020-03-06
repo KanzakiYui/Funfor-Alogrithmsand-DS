@@ -104,7 +104,7 @@ class Heap {
             3.  use leftIndex & rightIndex < n - 1 to check if child exists or not.
         */
         for(let i = 0; i< len; i++){
-            this.heapNodes[i].parent = i ? this.heapNodes[Math.floor(i/2)] : null;
+            this.heapNodes[i].parent = i ? this.heapNodes[Math.floor((i-1)/2)] : null;
             const leftIndex = 2*i + 1;
             const rightIndex = 2*i + 2;
             this.heapNodes[i].left = leftIndex < len ? this.heapNodes[leftIndex] : null;

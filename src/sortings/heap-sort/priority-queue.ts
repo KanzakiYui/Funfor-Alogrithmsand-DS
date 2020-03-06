@@ -24,7 +24,7 @@ class PriorityQueue extends Heap {
     }
 
     // Time complexity: O(1) + O(lgn) = O(lgn)
-    private insert(newValue){
+    public insert(newValue){
         // increase heap size since we add a new one.
         this.heapSize++;
         // now add a new node in the heap and setup all necessary info.
@@ -45,13 +45,18 @@ class PriorityQueue extends Heap {
         this.increaseKey(currentIndex, newValue)
     }
 
+    // Internally, build max priority queue means build max heap plus other methods
+    public buildMaxPriorityQueue(){
+        this.buildHeap();
+    }
+
     // Time complexity: O(1)
-    private maximum():HeapNode{
+    public maximum():HeapNode{
         return this.heapNodes[0];
     }
 
     // Time complexity: O(1) + O(lgn) = O(lgn)
-    private extractMaximum():HeapNode{
+    public extractMaximum():HeapNode{
         if(!this.heapSize)
             return null;
         const max = this.heapNodes[0];
@@ -65,7 +70,7 @@ class PriorityQueue extends Heap {
 
     // Time complexity: O(1) + O(lgn) = O(lgn)      <= tree height
     // TODO: verify this and add comments
-    private increaseKey(i:number, newValue:number){
+    public increaseKey(i:number, newValue:number){
         const currentValue = this.heapNodes[i].value;
         if(newValue < currentValue)
             throw new Error('new key is smaller than current key');
@@ -73,7 +78,7 @@ class PriorityQueue extends Heap {
         let currentIndex = i;
         while(currentIndex > 0){
             const parentNode = this.heapNodes[currentIndex].parent;
-            const currentNode = this.heapNodes[currentValue];
+            const currentNode = this.heapNodes[currentIndex];
             if(parentNode.value >= currentNode.value)
                 break;
             this.swap(parentNode, currentNode);
