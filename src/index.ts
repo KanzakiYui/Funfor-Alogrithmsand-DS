@@ -29,6 +29,7 @@ const array = [7, 9, 13, 11, 8, 5, 13, 11, 12];
 // app.problem.maximumSubarray.dynamicProgramming(
 //     [-2,1,-3,4,-1,2,1,-5,4]
 // );
-
 app.sort.heapSort(array);
+app.sort.heapSort();
+app.sort.quickSort(array);
 app.sort.heapSort();
