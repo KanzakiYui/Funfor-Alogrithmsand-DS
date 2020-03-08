@@ -23,6 +23,7 @@
     <li><a href='src/sortings/merge-sort.ts'>Merge Sort</a></li>
     <li><a href='src/sortings/heap-sort/heap-sort.ts'>Heap Sort (with full data structure)</a></li>
     <li><a href='src/sortings/heap-sort/index.ts'>Heap Sort (pure algorithm)</a></li>
+    <li><a href='src/sortings/heap-sort/priority-queue.ts'>Max Priority Queue (Max-heap Application)</a></li>
 </ol>
 
 <h4>Problems</h4>
