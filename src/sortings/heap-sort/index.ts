@@ -4,18 +4,22 @@ const heapSort = (array?: Array<number>) : Array<number> => {
 
     const heapify = (index: number) => {
         let current = array[index];
-        let leftIndex = 2 * index + 1;
-        let rightIndex = leftIndex + 1;
         let largestIndex = index;
-        if(leftIndex < heapsize && array[leftIndex] > current)
-            largestIndex = leftIndex
-        if(rightIndex < heapsize && array[rightIndex] > array[largestIndex])
-            largestIndex = rightIndex
-        if(largestIndex !== index) {
-            array[index] = array[largestIndex];
-            array[largestIndex] = current;
-            heapify(largestIndex);
-        }   
+        while(true){
+            let leftIndex = 2 * index + 1;
+            let rightIndex = leftIndex + 1;
+            if(leftIndex < heapsize && array[leftIndex] > current)
+                largestIndex = leftIndex
+            if(rightIndex < heapsize && array[rightIndex] > array[largestIndex])
+                largestIndex = rightIndex
+            if(largestIndex !== index){
+                array[index] = array[largestIndex];
+                array[largestIndex] = current;
+                index = largestIndex;
+            }
+            else
+                break;
+        }  
     }
 
     for(let i=Math.floor(len/2)-1; i>=0; i--)

@@ -17,6 +17,32 @@
 ///     already sorted, and middle element is exactly not smaller than left, and smaller
 ///     than right, thus NO extra action is needed, hence subarray is sorted.
 
+///////////////////////////////////////////////////////////////////////////////////////
+/// Time Complexity
+/// 1. Worst case:      O(n^2)
+///     The worst case happens when the array is ALREADY sorted in non-descending or
+///     non-ascending. Since each time it divides problem of T(n) into T(n-1) and T(1)
+///     problems, thus we have:
+///     T(n) = T(n-1) + O(1) + O(n) where the O(n) means the execution of partition.
+///     => we got T(n) = O(n^2)
+/// 2. Best case:       O(nlgn)
+///     The best case happens when each recursion partition the array of n into two n/2,
+///     which implies it divide evenly (as possible), and we have easily get:
+///     T(n) = 2T(n/2) + O(n)
+///     => we got T(n) = O(nlgn)
+/// 3. Average case:    O(nlgn)
+///     The average case happens when array is random, and we skip proof here. Intuitively,
+///     It's not hard to find out:
+///     T(n) = T((1-x)n) + T(xn) + O(n)
+
+///////////////////////////////////////////////////////////////////////////////////////
+/// Space Complexity
+/// O(lgn)
+/// Reason:
+/// 1. in-place
+/// 2. no extra auxiliary data structure
+/// 3. recursion call stack while the depth is O(lgn)
+
 const quickSort = (array?:Array<number>): Array<number> => {
     /*
         Partitioning:
@@ -33,7 +59,9 @@ const quickSort = (array?:Array<number>): Array<number> => {
         only result in that A[endIndex] (which has value of X) swap with
         array[partitionIndex+1] = A[startIndex], thus X is place at first, other
         elements since all larger than X, keep unchanged!
-        Time Complexity: O(n) where n = endIndex - startIndex
+
+        Time Complexity:
+        O(n) where n = endIndex - startIndex
     */
     const partitioning = (startIndex : number, endIndex : number) => {
         if(endIndex <= startIndex)

@@ -34,15 +34,19 @@
 /// example, if we allocate two temp subarrays in each recursion before
 /// merge-sort the two subarrays respectively recursively, then lots of spaces
 /// resources may be taken!
-/// However, in a standard merge sort algorithm, we don't need to do spend too
+/// However, in a standard merge sort algorithm, we don't need to do spend that
 /// much, since we can use 'startIndex, endIndex' together with the global array
 /// to 'simulate' the truncated subarray. See below implementation.
+///
+/// Reason:
+/// 1.  Recursion call stack, depth is O(lgn)
 /// 1.  In any recursion (n=k), there are only one tempArray created which is
 ///     used to combine two sorted parts (or we call 'subarrays').
-/// 2.  tempArray is created after merge-sort 'subarrays'.
-/// Therefore, it's not hard to find out the most additional auxiliary we used
-/// is nearly n/2, with some other O(1), and of course, input array is always passed
-/// by reference (in-place change!!), so totally use O(n) is reasonable and safe.
+/// 2.  tempArray is created after merge-sort 'subarrays', which used O(n).
+/// 3.  Memory for tempArray is free after current call exits.
+/// 4.  No other auxiliary data strcuture is used and it's in-place algorithm.
+///     Total = call stack taken + each time a call internally taken = O(lgn) + O(n)
+///     = O(n)
 
 /// Assumption: Suppose now we sort in non-descending order
 

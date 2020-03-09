@@ -13,8 +13,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 /// Space Complexity
 /// Always O(1)
-/// Reason: input array passed by reference, and it's in-place algorithm, no
-/// need extra space/additional data structure to store the output, etc.
+/// Reason:
+/// 1. in-place
+/// 2. no extra auxiliary data structure
+/// 3. no recursion call stack (only for loop)
 
 /// Assumption: Suppose now we sort in non-descending order
 

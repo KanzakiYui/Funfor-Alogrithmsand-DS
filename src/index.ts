@@ -10,7 +10,7 @@ const app = new App({
 ///////////////////////////////////////////////////////////////////////////////////////
 /// Test
 
-const array = [7, 9, 13, 11, 8, 5, 13, 11, 12];
+const array = [13, 12, 8, 4, 13, 11, 12, 5, 8, 10];
 // app.sort.insertionSort();
 // app.sort.insertionSort(array);
 // app.sort.selectionSort();

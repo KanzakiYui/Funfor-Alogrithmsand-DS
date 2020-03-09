@@ -58,10 +58,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 /// Space Complexity
 /// Always O(1)
-/// Reason: although here we used array of nodes, but as we can see, it's in-place change,
-/// and despite we have some recusive function, all temp resouce at any level/stage is
-/// freed once function exit or no resource accumulated during lifetime. And of course
-/// no auxiliary (e.g. array) is needed.
+/// Reason:
+/// 1. in-place
+/// 2. no extra auxiliary data structure
+/// 3. no recursion call stack (only for and while loop)
 
 export class HeapNode {
     public value: number;
@@ -125,31 +125,37 @@ class Heap {
 
     // As long as we are given the index, we can find a subtree rooted at A[i]
     protected heapify(index: number){
-        const currentNode = this.heapNodes[index];
-        const currentValue = currentNode.value;
-        const leftNode = this.heapNodes[index].left;
-        const leftValue = leftNode?.value;
-        const rightNode = this.heapNodes[index].right;
-        const rightValue = rightNode?.value;
-        /*
-            We check exist based on two things:
-            1.  Does it exist in array (e.g. leave's left child is null)
-            2.  If exists, then does ot exost in current heap scope (since we will
-                remove obtained element from heap scope)
-        */
-        const isLeftExistInHeap = leftNode && leftNode.index < this.heapSize;
-        const isRightExistInHeap = rightNode && rightNode.index < this.heapSize;
+        while(true){
+            // Get current node's info
+            let currentNode = this.heapNodes[index];
+            let currentValue = currentNode.value;
+            // Get left node's info
+            let leftNode = this.heapNodes[index].left;
+            let leftValue = leftNode?.value;
+            let leftIndex = leftNode?.index;
+            // Get right node's info
+            let rightNode = this.heapNodes[index].right;
+            let rightValue = rightNode?.value;
+            let rightIndex = rightNode?.index;
 
-        if(  isLeftExistInHeap && leftValue > currentValue && (isRightExistInHeap ? leftValue >= rightValue : true)){
-            this.swap(leftNode, currentNode);
-            // recursivly do it, since the swapped smaller one may become the root
-            // of another subtree, we need make sure, the whole subtree indexed at
-            // i is max-heap
-            this.heapify(leftNode.index);
-        }      
-        else if( isRightExistInHeap && rightValue > currentValue && (isLeftExistInHeap ? rightValue >= leftValue : true)){
-            this.swap(rightNode, currentNode);
-            this.heapify(rightNode.index);
+            // Determine which is largest one in current scope (this.heapSize)
+            let largestIndex = index;
+            let largestNode = currentNode;
+            if(leftIndex < this.heapSize && leftValue > currentValue){
+                largestIndex = leftIndex;
+                largestNode = leftNode;
+            }                
+            if(rightIndex < this.heapSize && rightValue > largestNode.value){
+                largestIndex = rightIndex;
+                largestNode = rightNode;
+            }           
+            if(largestIndex !== index){
+                this.swap(largestNode, currentNode);
+                // top-to-bottom to check iteratively
+                index = largestIndex;
+            }
+            else
+                break;
         }
     }
 
