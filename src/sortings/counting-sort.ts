@@ -62,7 +62,10 @@ const countingSort = (array : Array<number>, min: number, max: number) : Array<n
     // ^ since A[0, ..., X-2] has length of X-1, and the Xth one which
     // is current picked element, should be placed at Xth position, which
     // means A[X-1]
-    for(let i=0; i<len; i++){
+    // Also note the loop downto instead upto, the iteration order is important
+    // when regarding there are elements have same value, that is, we need to
+    // keep the sorting 'stable'! (think about why!)
+    for(let i=len-1; i>=0; i--){
         const currentValue = array[i];
         const numberOfSmallerElements = countingArray[currentValue-min];
         resultArray[numberOfSmallerElements-1] = currentValue;
