@@ -50,6 +50,12 @@ const countingSort = (array : Array<number>, min: number, max: number) : Array<n
     for(let i=1; i<range; i++)
         countingArray[i] += countingArray[i-1];
 
+    /*
+        Use the following loop to count instead, will sort array in non-ascending order:
+        for(let i=range-2; i>=0; i--)
+            countingArray[i] += countingArray[i+1];
+    */
+
     // if there are X elements in A has value not larger than Y, then
     // element with value Y should be place at:
     // A[0, 1, ..., X-2, X-1]
