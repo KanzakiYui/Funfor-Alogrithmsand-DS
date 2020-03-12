@@ -63,6 +63,18 @@
 /// 2. no extra auxiliary data structure
 /// 3. no recursion call stack (only for and while loop)
 
+///////////////////////////////////////////////////////////////////////////////////////
+/// Stable
+/// No
+/// Reason:
+/// It's mainly due to the heap output order, consider:
+/// [1, 3, 2, 3, 2]
+/// after build heap: [3, 3, 2, 1, 2]     => still preserve stablity (1st 3 is 1st)
+/// however, when output, we always swap root with 'current' last one, it's easy to
+/// imagine that the 1st 3 was swapped to last position!
+
+/// Assumption: Suppose now we sort in non-descending order
+
 export class HeapNode {
     public value: number;
     // We switch value to present switch node, so index in array shouldn't be changed.

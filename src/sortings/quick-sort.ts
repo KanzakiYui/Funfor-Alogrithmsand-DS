@@ -43,6 +43,16 @@
 /// 2. no extra auxiliary data structure
 /// 3. recursion call stack while the depth is O(lgn)
 
+///////////////////////////////////////////////////////////////////////////////////////
+/// Stable
+/// No
+/// Reason:
+/// Because the shift of current endIndex and partitionIndex will be always executed,
+/// consider about: [1, 3, 3]
+/// after first recursion, the last '3' will be swapped with first '3'.
+
+/// Assumption: Suppose now we sort in non-descending order
+
 const quickSort = (array?:Array<number>): Array<number> => {
     /*
         Partitioning:

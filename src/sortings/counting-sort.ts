@@ -26,6 +26,15 @@
 /// Space Complexity
 /// Always: O(n+k)
 
+///////////////////////////////////////////////////////////////////////////////////////
+/// Stable
+/// Yes
+/// Reason:
+/// Because of last loop, it iterates from end to start, and countArray[X] - 1, it
+/// guarantees if the value occurs, earliers stay at eariler, later stays at later.
+
+/// Assumption: Suppose now we sort in non-descending order
+
 const countingSort = (array : Array<number>, min: number, max: number) : Array<number> => {
     // Firstly, we must say here the bound (min-max) is explicitly provided, but
     // even not provided, we can easily use O(n) time to find max and min of given array.

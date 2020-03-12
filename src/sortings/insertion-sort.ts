@@ -19,6 +19,13 @@
 /// 2. no extra auxiliary data structure
 /// 3. no recursion call stack (only for loop)
 
+///////////////////////////////////////////////////////////////////////////////////////
+/// Stable
+/// Yes
+/// Reason:
+/// Because the shift to right only occurs when prev > current, think about below:
+/// [x1, x2, ..., xi, ..., xk, ..., xj, ..., xr], and xi = xj
+
 /// Assumption: Suppose now we sort in non-descending order
 
 const insertionSort = (array: Array<number> = []) : Array<number> => {

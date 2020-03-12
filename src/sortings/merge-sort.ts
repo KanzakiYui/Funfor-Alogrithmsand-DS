@@ -48,6 +48,14 @@
 ///     Total = call stack taken + each time a call internally taken = O(lgn) + O(n)
 ///     = O(n)
 
+///////////////////////////////////////////////////////////////////////////////////////
+/// Stable
+/// Yes
+/// Reason:
+/// suppose xi = xj and xi is on the left, xj is on the right, of course xi appear eailer
+/// than xj, and when combine, only if left > right then pick right first, otherwise pick
+/// left first. So it's not hard to imagine it's stable!
+
 /// Assumption: Suppose now we sort in non-descending order
 
 const mergeSort = (array : Array<number> = []) : Array<number> => {

@@ -18,6 +18,13 @@
 /// 2. no extra auxiliary data structure
 /// 3. no recursion call stack (only for loop)
 
+///////////////////////////////////////////////////////////////////////////////////////
+/// Stable
+/// No
+/// Reason:
+/// Simply because the shift can cause elements jump to 'unexpected' position, think about:
+/// [3, 3, 1] => [1, 3, 3] while 1st 3 shift to last index!
+
 /// Assumption: Suppose now we sort in non-descending order
 
 const selectionSort = (array: Array<number> = []) : Array<number> => {
